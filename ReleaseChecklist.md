@@ -35,3 +35,5 @@
 	```
 	make deb
 	```
+
+- update formula in homebrew-tap
