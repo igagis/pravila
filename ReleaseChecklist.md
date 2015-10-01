@@ -1,4 +1,4 @@
-#C++ library release checklist
+#Release checklist
 
 - add new entry to debian/changelog file if it has not beed added yet:
 
@@ -37,3 +37,8 @@
 	```
 
 - update formula in homebrew-tap
+
+- generate NuGet package
+	```
+	Write-NuGetPackage nuget.autopkg
+	```
