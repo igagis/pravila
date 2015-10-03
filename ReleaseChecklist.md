@@ -40,5 +40,5 @@
 
 - generate NuGet package
 	```
-	Write-NuGetPackage nuget.autopkg
+	build_nuget.bat
 	```
