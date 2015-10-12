@@ -1,0 +1,36 @@
+Source: lib%NAME%
+Section: misc
+Priority: extra
+Maintainer: Ivan Gagis <igagis@gmail.com>
+Build-Depends: debhelper (>= 9), prorab,
+		libc6-dev, libutki-dev, libpapki-dev, libpugixml-dev
+Build-Depends-Indep: doxygen
+Standards-Version: 3.9.2
+
+Package: lib%NAME%$(soname)
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: cross-platform C++ library.
+ Some library.
+
+Package: lib%NAME%$(soname)-dbg
+Section: libdevel
+Architecture: any
+Depends: lib%NAME%$(soname) (= ${binary:Version}), ${misc:Depends}
+Description: debugging symbols for lib%NAME%$(soname) package.
+
+Package: lib%NAME%-dev
+Section: devel
+Architecture: all
+Depends: lib%NAME%$(soname) (= ${binary:Version}), lib%NAME%$(soname)-dbg (= ${binary:Version}), ${misc:Depends}
+Suggests: lib%NAME%-doc
+Description: cross-platform C++ library.
+ Some library.
+
+Package: lib%NAME%-doc
+Section: devel
+Architecture: all
+Depends: ${misc:Depends}
+Description: documentation for lib%NAME% library.
+ For more details see description to lib%NAME%-dev package.
