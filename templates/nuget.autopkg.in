@@ -1,0 +1,52 @@
+nuget{
+	nuspec{
+		id = lib%NAME%;
+		version : $(version).1;
+		title: Some C++ library;
+		authors: {Ivan Gagis};
+		owners: {Ivan Gagis};
+		licenseUrl: "https://raw.githubusercontent.com/igagis/%NAME%/master/LICENSE";
+		projectUrl: "https://github.com/igagis/%NAME%";
+		iconUrl: "https://github.com/igagis/%NAME%/blob/master/logo.svg";
+		requireLicenseAcceptance:false;
+		summary: Some C++ library;
+
+		description: @"Some C++ library";
+		releaseNotes: "Initial release";
+		copyright: Copyright 2015 Ivan Gagis;
+		tags: { native};
+	}
+	dependencies {
+		packages : {
+			libutki/1.0.8.4;
+			libpapki/1.0.2.2;
+		};
+	}
+	files {
+		include: { "src\**\*.hpp" };
+		
+		[x86,release] { 
+			lib: msvs_solution\Release\lib%NAME%.lib;
+//			symbols: msvs_solution\Release\lib%NAME%.pdb;
+//			bin: msvs_solution\Release\lib%NAME%.dll;
+		}
+
+		[x86,debug] { 
+			lib: msvs_solution\Debug\lib%NAME%.lib;
+//			symbols: msvs_solution\Debug\lib%NAME%.pdb;
+//			bin: msvs_solution\Debug\lib%NAME%.dll;
+		}
+
+		[x64,release] { 
+			lib: msvs_solution\x64\Release\lib%NAME%.lib;
+//			symbols: msvs_solution\x64\Release\lib%NAME%.pdb;
+//			bin: msvs_solution\x64\Release\lib%NAME%.dll;
+		}
+
+		[x64,debug] { 
+			lib: msvs_solution\x64\Debug\lib%NAME%.lib;
+//			symbols: msvs_solution\x64\Debug\lib%NAME%.pdb;
+//			bin: msvs_solution\x64\Debug\lib%NAME%.dll;
+		}  
+	}
+}
