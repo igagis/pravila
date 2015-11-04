@@ -29,16 +29,3 @@
 - commit to version control system
 
 - make version tag in version control system
-
-- generate debian package:
-
-	```
-	make deb
-	```
-
-- update formula in homebrew-tap
-
-- generate NuGet package
-	```
-	build_nuget.bat
-	```
