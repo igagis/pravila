@@ -18,12 +18,6 @@
 	dch -r -D stable ""
 	```
 
-- update the version in all places where needed:
-
-	```
-	make ver
-	```
-
 - Check if SO-name needs increment and update src/soname.txt if needed
 
 - commit to version control system
