@@ -27,7 +27,7 @@ newver=$majmin$((rev + 1))
 
 dch -v"$newver" "$1"
 
-dch -r -D stable ""
+dch -r -D unstable ""
 
 git pull
 git commit -a -m"release $newver"
