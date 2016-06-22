@@ -15,7 +15,7 @@
 - mark debian/changelog entry as released:
 
 	```
-	dch -r -D stable ""
+	dch -r -D unstable ""
 	```
 
 - Check if SO-name needs increment and update src/soname.txt if needed
