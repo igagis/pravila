@@ -25,6 +25,9 @@ newver=$majmin$((rev + 1))
 
 #echo newver = $newver
 
+if [[ -z ${DEBEMAIL+x} ]]; then echo "error: DEBEMAIL is unset"; exit 1; fi
+if [[ -z ${DEBFULLNAME+x} ]]; then echo "error: DEBFULLNAME is unset"; exit 1; fi
+
 dch -v"$newver" "$1"
 if [[ $? -ne 0 ]]; then exit 1; fi
 
