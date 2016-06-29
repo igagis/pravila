@@ -26,11 +26,22 @@ newver=$majmin$((rev + 1))
 #echo newver = $newver
 
 dch -v"$newver" "$1"
+if [[ $? -ne 0 ]]; then exit 1; fi
 
 dch -r -D unstable ""
+if [[ $? -ne 0 ]]; then exit 1; fi
 
 git pull
+if [[ $? -ne 0 ]]; then exit 1; fi
+
 git commit -a -m"release $newver"
+if [[ $? -ne 0 ]]; then exit 1; fi
+
 git push
+if [[ $? -ne 0 ]]; then exit 1; fi
+
 git tag $newver
+if [[ $? -ne 0 ]]; then exit 1; fi
+
 git push --tags
+if [[ $? -ne 0 ]]; then exit 1; fi
