@@ -11,6 +11,11 @@ if [[ -z "$1" ]]; then
 fi
 
 
+git pull
+if [[ $? -ne 0 ]]; then exit 1; fi
+
+
+
 version=$(prorab-deb-version.sh debian/changelog)
 
 #echo $version
@@ -32,9 +37,6 @@ dch -v"$newver" "$1"
 if [[ $? -ne 0 ]]; then exit 1; fi
 
 dch -r -D unstable ""
-if [[ $? -ne 0 ]]; then exit 1; fi
-
-git pull
 if [[ $? -ne 0 ]]; then exit 1; fi
 
 git commit -a -m"release $newver"

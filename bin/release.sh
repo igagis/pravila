@@ -4,6 +4,13 @@
 #It changes the debian record to unstable release
 #And pushes the release to git repo adding the release tag.
 
+git pull
+if [[ $? -ne 0 ]]; then
+    echo "error: git pull failed"
+    exit 1;
+fi
+
+
 version=$(prorab-deb-version.sh debian/changelog)
 
 #echo $version
@@ -14,12 +21,6 @@ if [[ -z ${DEBFULLNAME+x} ]]; then echo "error: DEBFULLNAME is unset"; exit 1; f
 dch -r -D unstable ""
 if [[ $? -ne 0 ]]; then
     echo "dch -r failed"
-    exit 1;
-fi
-
-git pull
-if [[ $? -ne 0 ]]; then
-    echo "error: git pull failed"
     exit 1;
 fi
 
