@@ -22,7 +22,7 @@ Description: debugging symbols for lib%NAME%$(soname) package.
 
 Package: lib%NAME%-dev
 Section: devel
-Architecture: all
+Architecture: any
 Depends: lib%NAME%$(soname) (= ${binary:Version}), lib%NAME%$(soname)-dbg (= ${binary:Version}), ${misc:Depends}
 Suggests: lib%NAME%-doc
 Description: cross-platform C++ library.
