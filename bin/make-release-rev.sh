@@ -16,7 +16,7 @@ if [[ $? -ne 0 ]]; then exit 1; fi
 
 
 
-version=$(prorab-deb-version.sh debian/changelog)
+version=$(myci-deb-version.sh debian/changelog)
 
 #echo $version
 
