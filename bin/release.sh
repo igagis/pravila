@@ -4,6 +4,9 @@
 #It changes the debian record to unstable release
 #And pushes the release to git repo adding the release tag.
 
+#we want exit immediately if any command fails and we want error in piped commands to be preserved
+set -eo pipefail
+
 git pull
 if [[ $? -ne 0 ]]; then
     echo "error: git pull failed"

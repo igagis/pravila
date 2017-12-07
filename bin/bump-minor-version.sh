@@ -5,6 +5,9 @@
 
 #!/bin/bash
 
+#we want exit immediately if any command fails and we want error in piped commands to be preserved
+set -eo pipefail
+
 if [[ -z "$1" ]]; then
     echo -e "Error: comment as argument expected"
     exit 1
