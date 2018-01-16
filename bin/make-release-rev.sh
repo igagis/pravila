@@ -13,7 +13,6 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-
 git pull
 if [[ $? -ne 0 ]]; then exit 1; fi
 
@@ -48,20 +47,10 @@ if [[ $? -ne 0 ]]; then exit 1; fi
 git push
 if [[ $? -ne 0 ]]; then exit 1; fi
 
-git checkout -B release
-[ $? -ne 0 ] && exit 1;
-
-git merge master
-[ $? -ne 0 ] && exit 1;
-
-git push --set-upstream origin release
-[ $? -ne 0 ] && exit 1;
-
 git tag $newver
 if [[ $? -ne 0 ]]; then exit 1; fi
 
-git push --tags
-if [[ $? -ne 0 ]]; then exit 1; fi
+git tag -f latest
 
-git checkout master
-[ $? -ne 0 ] && exit 1;
+git push -f --tags
+if [[ $? -ne 0 ]]; then exit 1; fi
