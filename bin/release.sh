@@ -45,7 +45,7 @@ if [[ $? -ne 0 ]]; then
     exit 1;
 fi
 
-git tag -f latest
+#git tag -f latest
 
 git push -f --tags
 if [[ $? -ne 0 ]]; then
