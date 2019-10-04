@@ -1,4 +1,6 @@
-#Release checklist
+# Release checklist
+
+TODO: rewise
 
 - add new entry to debian/changelog file if it has not beed added yet:
 
