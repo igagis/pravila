@@ -1,0 +1,1 @@
+= How to pack a library for cocoapods
