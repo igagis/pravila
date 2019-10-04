@@ -1,4 +1,4 @@
-= How to pack a C++ library for cocoapods
+= WIP: How to pack a C++ library for cocoapods
 
 . create `xcode` directory in project root
 . create `cocoapods` directory in project root
@@ -22,4 +22,4 @@
 ... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to $(inherited)
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
-. add the whole `xcode` directory to git
+. add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
