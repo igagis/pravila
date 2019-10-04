@@ -15,6 +15,11 @@
 ... in the project files navigator, right-click on the folder containing dummy sources
 ... click `Delete`
 ... click `Move To Trash`
+.. remove overriding of linker flags to suppress cocoapods warning about `OTHER_LDFLAGS` later
+... in the project files navigator, select library name with blue icon
+... select `Build Settings`
+... in search field enter `other linker flags`
+... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to $(inherited)
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git
