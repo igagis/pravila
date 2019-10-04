@@ -1,1 +1,21 @@
-= How to pack a library for cocoapods
+= How to pack a C++ library for cocoapods
+
+. create `xcode` directory in project root
+
+  `mkdir xcode`
+
+. run `Xcode` and and create a new project
+.. as a template for the new project select `ios`/`Static Library`
+.. click `Next`
+.. as `Product Name` enter library name **without** `lib` prefix
+.. fill `Organization Name` and `Organization Identifier` fields
+.. as `Language` select `Objective-C`
+.. click `Next`
+.. select the newly created `xcode` directory as project location
+.. click `Create`
+.. remove the dummy source files added by `Xcode`
+... in the project files navigator, right-click on the folder containing dummy sources
+... click `Delete`
+... click `Move To Trash`
+. close the `Xcode`
+
