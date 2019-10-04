@@ -17,3 +17,4 @@
 ... click `Move To Trash`
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
+. add the whole `xcode` directory to git
