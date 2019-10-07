@@ -25,6 +25,11 @@
 ... select `Build Settings`
 ... in search field enter `catalyst`
 ... set `Supports Mac Catalyst` setting to `No`
+.. set deployment target to `iOS 8.0` to support both `armv7` and `arm64` architectures
+... in the project files navigator, select library name with blue icon
+... select `Build Settings`
+... in search field enter `ios deployment target`
+... set `iOS Deployment Target` setting to `iOS 8.0`
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
