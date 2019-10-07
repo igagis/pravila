@@ -20,6 +20,11 @@
 ... select `Build Settings`
 ... in search field enter `other linker flags`
 ... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to $(inherited)
+.. remove `catalyst` support
+... in the project files navigator, select library name with blue icon
+... select `Build Settings`
+... in search field enter `catalyst`
+... set `Supports Mac Catalyst` setting to `No`
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
