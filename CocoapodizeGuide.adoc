@@ -34,12 +34,19 @@
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
 . configure automatic adding of source to the project. This is needed because `Xcode` is unable to pick all sources from specific directory, so we use side tool for just adding all sources from directory to `Xcode` project.
-.. add conditional script to `before_script` section of `.travis-ci.yml`:
+.. add `ios` conditional script to `before_script:` section of `.travis-ci.yml`:
 
   before_script:
 - if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
     curl -L https://github.com/zackslash/Xcode-Proj-Adder/raw/master/bin/XcodeProjAdder -O &&
     chmod +x XcodeProjAdder &&
     (cd xcode/$PACKAGE_NAME && ../../XcodeProjAdder -XCP $PACKAGE_NAME.xcodeproj -SCSV `echo $(find ../../src -type f -name *.cpp) | sed -n -e 's/ /,/gp'`)
+  fi
+
+.. add `ios` conditional script to `script:` section of `.travis-ci.yml`:
+
+  script:
+- if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
+    xcodebuild -workspace xcode/$PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME CONFIGURATION_BUILD_DIR=../build -configuration Release;
   fi
 
