@@ -1,4 +1,4 @@
-= WIP: How to pack a C++ library for cocoapods
+= How to pack a C++ library for cocoapods
 
 . create `xcode` directory in project root
 . create `cocoapods` directory in project root and create `podspec`
