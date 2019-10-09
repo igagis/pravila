@@ -1,7 +1,8 @@
 = WIP: How to pack a C++ library for cocoapods
 
 . create `xcode` directory in project root
-. create `cocoapods` directory in project root
+. create `cocoapods` directory in project root and create `podspec`
+.. copy `lib%name%.podspec.in` template to `cocoapods` directory and edit it accordingly
 . run `Xcode` and and create a new project
 .. as a template for the new project select `ios`/`Static Library`
 .. click `Next`
