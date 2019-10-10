@@ -20,7 +20,7 @@
 ... in the project files navigator, select library name with blue icon
 ... select `Build Settings`
 ... in search field enter `other linker flags`
-... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to $(inherited)
+... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to `$(inherited)`
 .. remove `catalyst` support
 ... in the project files navigator, select library name with blue icon
 ... select `Build Settings`
