@@ -1,0 +1,33 @@
+= C++ naming conventions
+
+- all names (classes, functions, variables) are lowercase snake-case
+- class names do not have any suffixes, like `\_t`
+- to avoid variable and getter function names collision the variable can have `\_v` suffix, or variable getter function can have `get_` prefix
+
+Example:
+
+[source,cpp]
+....
+class node{
+
+  int size_v;
+
+  int length;
+
+public:
+  node(){}
+  ~node(){}
+  
+  int size(){
+    return this->size_v;
+  }
+  
+  int get_length(){
+    return this->length;
+  }
+  
+  void some_function(){
+    this->length += 1;
+  }
+};
+....
