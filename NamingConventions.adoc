@@ -1,6 +1,6 @@
 = C++ naming conventions
 
-. All names (classes, functions, variables, etc.) are lowercase snake-case.
+. All names (classes, functions, variables, etc.) are lowercase snake case.
 .. Class and type names do not have any special suffixes, like `_t`.
 .. To avoid variable and getter function names collision the variable can be given distinct name, for example adding `\_v` suffix, or `_variable` suffix or whatever else name. The other way is to have `get_` prefix in the getter function name.
 
