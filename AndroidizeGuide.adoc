@@ -1,0 +1,8 @@
+= Android library AAR package
+
+. create `android` directory in project root
+. start Android Studio and select `Start a new Android Studio project`
+. select `Phone and Tablet` -> `Empty Activity` and click `Next`
+. as name enter library name without `lib` prefix, as `Package name` enter unique package name, as `Save location` slect the newly created `android` directory, as `Language` select `Java`, as `Minimum SDK` select API 21, leave `Use legacy android.support libraries` unchecked, click `Finish`
+. remove `android/.idea` directory and add the whole `android` directory to git
+.
