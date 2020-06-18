@@ -79,6 +79,8 @@
           android log ${ANDROID_GRADLE_NATIVE_MODULES}
       )
 
+. copy `templates/%name%-$(version).pom.in` file to `android` directory, rename it and edit accordingly, add it to git
+
 . in the `.travic-ci.yml` in the `script:` section build the android AAR as following
 
   (cd android && ./gradlew copy_aar) &&
