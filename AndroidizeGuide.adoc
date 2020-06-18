@@ -14,12 +14,25 @@
   apply plugin: 'com.ydq.android.gradle.native-aar.export' // must go after android gradle plugin
   apply plugin: 'com.ydq.android.gradle.native-aar.import' // must go after android gradle plugin
 
+. into the `android/defaultConfig` clause add
+
+  externalNativeBuild {
+      cmake {
+          targets "<library-name>"
+      }
+  }
+
 . into the `android` clause add
 
   nativeBundleExport {
       headerDir = "${project.projectDir}/../../src/"
       bundleStatic = true
       includeHeaderFilter.add("**/*.hpp")
+  }
+  externalNativeBuild {
+      cmake {
+          path "CMakeLists.txt" // Provides a relative path to your CMake build script.
+      }
   }
  
  . after `android` clause add the following and edit the dependencies as needed
