@@ -9,4 +9,62 @@
 . as `Module name` enter library name without `lib` prefix, click `Finish`, agree to add new files to git
 . open file `android/build.gradle` and add `classpath 'com.ydq.android.gradle.build.tool:nativeBundle:1.0.6'` to `buildscript` -> `dependencies`, in the same clasue change android gradle plugin version to `3.4.2` as build fails on `travic-ci.org` for some reason with later versions of the plugin
 . open file `android/<library-name>/build.gradle` file
-. add lines `apply plugin: 'com.ydq.android.gradle.native-aar.export' // must go after android gradle plugin` and `apply plugin: 'com.ydq.android.gradle.native-aar.import' // must go after android gradle plugin` right after the first line which imports android plugin
+. add the following two lines right after the first line which imports android plugin
+
+  apply plugin: 'com.ydq.android.gradle.native-aar.export' // must go after android gradle plugin
+  apply plugin: 'com.ydq.android.gradle.native-aar.import' // must go after android gradle plugin
+
+. into the `android` clause add
+
+  nativeBundleExport {
+      headerDir = "${project.projectDir}/../../src/"
+      bundleStatic = true
+      includeHeaderFilter.add("**/*.hpp")
+  }
+ 
+ . after `android` clause add the following and edit the dependencies as needed
+ 
+  repositories {
+      maven {
+          url 'https://dl.bintray.com/igagis/android/'
+      }
+  }
+  dependencies {
+      implementation 'io.github.igagis:utki:+'
+      implementation 'io.github.igagis:opros:+'
+  }
+
+. right after that add the following
+
+  // copy and rename release AAR to unified name
+  task copy_aar(type: Copy) {
+      from file("build/outputs/aar/")
+      into file("../")
+      include("*-static-release.aar")
+      rename { String fileName ->
+          fileName.replace("static-release.aar", "\$(version).aar.in")
+      }
+  }
+
+  afterEvaluate {
+      copy_aar.dependsOn(assembleRelease)
+  }
+
+. create `android/<library-name>/CMakeLists.txt file with the following contents and add it to git, edit it as needed
+
+  cmake_minimum_required(VERSION 3.4.1)
+  set(name <library-name>)
+  file(GLOB_RECURSE srcs "../../src/*.cpp")
+  include (${ANDROID_GRADLE_NATIVE_BUNDLE_PLUGIN_MK})
+  add_library(
+          ${name}
+          STATIC
+          ${srcs}
+      )
+  target_link_libraries(
+          ${name}
+          android log ${ANDROID_GRADLE_NATIVE_MODULES}
+      )
+
+. `git commit -am"add android project"`
+. `git push`
