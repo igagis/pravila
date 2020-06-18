@@ -25,4 +25,9 @@
 . for all configurations set `C/C++` -> `General` -> `Debug Information Format` to `C7 compatible (/Z7)`
 . for each configuration set the `Project Master Settings` -> `C/C++ Settings` -> `Runtime Library` to the corresponding runtime linking option
 . for each configuration set the `C/C++` -> `Code Generation` -> `Runtime Library` to the same value as on previous step
-. TODO
+. copy `templates/nuget` directory to the projects root, add `nuget` directory to git
+. edit `nuget/build_nuget.ps1` to include building for necessary configurations
+. edit `nuget/nuget.autopkg.in` accordingly
+. copy `templates/appveyor.yml` to projects root, add the file to git
+. commit everything to git
+. `git push`
