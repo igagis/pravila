@@ -66,5 +66,20 @@
           android log ${ANDROID_GRADLE_NATIVE_MODULES}
       )
 
+. in the `.travic-ci.yml` in the `script:` section build the android AAR as following
+
+  (cd android && ./gradlew copy_aar) &&
+  myci-apply-version.sh -v $PACKAGE_VERSION android/*.pom.in &&
+  myci-apply-version.sh -v $PACKAGE_VERSION android/*.aar.in --filename-only;
+
+. in the `.travic-ci.yml` in the `deploy:` section
+
+  -provider: script
+    skip_cleanup: true
+    script: myci-deploy-maven-bintray.sh -u igagis -r android -d io/github/igagis -p $PACKAGE_NAME -v $PACKAGE_VERSION android/$PACKAGE_NAME-$PACKAGE_VERSION.aar
+    on:
+      tags: true
+      condition: $TRAVIS_JOB_NAME = android
+
 . `git commit -am"add android project"`
 . `git push`
