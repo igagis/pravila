@@ -1,0 +1,28 @@
+= Pack library to nuget package
+
+. launch Visual Studio and click `Create a new project`
+. select `Empty Project` as project template and click `Next`
+. as `Project name` enter library name with `lib` prefix, as `Location` enter path to the project repository root directory, as `Solution name` enter `msvs_solution`
+. make sure that `Place solution and project in the same directory` checkbox is `unchecked` and click `Create`
+. in the project navigator panel right-click the `Source Files` folder and selct `Add` -> `Existing Item...`
+. select some library `.cpp` files and click `Add`
+. click `Save All` button or use keyboard shortcut `Ctrl+Shift+s`
+. add the whole `msvs_solution` directory to git
+. in the project navigator panel right-click the library project name and select `Manage NuGet Packages...`
+. install needed dependency nuget packages
+. click `Save All` button or use keyboard shortcut `Ctrl+Shift+s`
+. add the `msvs_solution/lib<name>/packages.config` file to git
+. open the `msvs_solution/lib<name>/lib<name>.vcxproj` file in the text editor
+. search for
+`<ItemGroup><ClCompile Include="........"/>...</ItemGroup>` and change it to include all `.cpp` files, like this `<ItemGroup><ClCompile Include="..\..\src\**\*.cpp"/></ItemGroup>`
+. in the project navigator panel right-click the solution and select `Configuration Manager...`
+. click `Active solution configuration:` combobox and select `<Edit...>`
+. rename existing `Debug` and `Release` configurations to something like `v142_Debug_MD` and `v142_Release_MD` and add new configurations for different toolsets and runtime linkage
+. in the project navigator panel right-click the library project name and select `Properties`
+. for all configurations set `General` -> `Configuration Type` to `Static Library (.lib)`
+. for all configurations set `General` -> `Windows SDK Version` to `8.1`
+. for all configurations set `Advanced` -> `Character Set` to `Use Multi-Byte Character Set`
+. for all configurations set `C/C++` -> `General` -> `Debug Information Format` to `C7 compatible (/Z7)`
+. for each configuration set the `Project Master Settings` -> `C/C++ Settings` -> `Runtime Library` to the corresponding runtime linking option
+. for each configuration set the `C/C++` -> `Code Generation` -> `Runtime Library` to the same value as on previous step
+. TODO
