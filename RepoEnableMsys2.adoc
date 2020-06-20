@@ -1,0 +1,17 @@
+= enable msys2 repo
+
+For Windows Msys2 environment (pacman packet manager).
+
+. Download and install link:http://msys2.org[**Msys2**] if you haven't already
+
+. launch **Msys2** shell (`msys`/`mingw32`/`mingw64`)
+
+. Add `igagis` repositories to `/etc/pacman.conf`
+
+  echo -e '[igagis_msys]\nSigLevel = Optional TrustAll\nServer = https://dl.bintray.com/igagis/msys2/msys' >> /etc/pacman.conf
+  echo -e '[igagis_mingw64]\nSigLevel = Optional TrustAll\nServer = https://dl.bintray.com/igagis/msys2/mingw64' >> /etc/pacman.conf
+  echo -e '[igagis_mingw32]\nSigLevel = Optional TrustAll\nServer = https://dl.bintray.com/igagis/msys2/mingw32' >> /etc/pacman.conf
+
+. Install some package
+
+    pacman -Sy <package>
