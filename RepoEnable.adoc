@@ -1,7 +1,7 @@
 = enable packet system repository
 
 - link:EnableRepoDeb.adoc[**deb**] (Linux)
-- **homebrew** (Mac OS X)
+- link:EnableRepoHomebrew.adoc[**homebrew**] (Mac OS X)
 - **Android**
 - **Msys2** (Windows)
 - **Nuget** (Windows), nothing to setup, all packages are hosted right on http://nuget.org
