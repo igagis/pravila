@@ -1,6 +1,6 @@
 = enable packet system repository
 
-- **deb** (debian / ubuntu / raspbian)
+- link:EnableRepoDeb.adoc[**deb**] (Linux)
 - **homebrew** (Mac OS X)
 - **Android**
 - **Msys2** (Windows)
