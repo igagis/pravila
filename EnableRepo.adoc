@@ -2,7 +2,7 @@
 
 - link:EnableRepoDeb.adoc[**deb**] (Linux)
 - link:EnableRepoHomebrew.adoc[**homebrew**] (Mac OS X)
-- **Android**
+- link:EnableRepoAndroid.adoc[**Android**]
 - **iOS**
 - link:EnableRepoMsys2.adoc[**Msys2**] (Windows)
 - **Nuget** (Windows), nothing to setup, all packages are hosted right on http://nuget.org
