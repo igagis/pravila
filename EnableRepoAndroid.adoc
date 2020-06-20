@@ -1,0 +1,3 @@
+= enable repo for android
+
+For distributing binary libraries for Android the link:https://github.com/howardpang/androidNativeBundle[androidNativeBundle] plugin is used. Refer to its documentation to find out how to use it.
