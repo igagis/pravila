@@ -1,0 +1,5 @@
+= enable nuget repo
+
+Packages are stored right on link:http://nuget.org[nuget.org], so you don't have to do anything special to setup the repo.
+
+In **Visual Studio 2015+** right-click on project name in solution navigator panel and select `Manage NuGet Packages...`, install packages from there.
