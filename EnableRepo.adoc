@@ -5,4 +5,4 @@
 - link:EnableRepoAndroid.adoc[**Android**]
 - link:EnableRepoCocoapods.adoc[**cocoapods**] (iOS)
 - link:EnableRepoMsys2.adoc[**Msys2**] (Windows)
-- **Nuget** (Windows), nothing to setup, all packages are hosted right on http://nuget.org
+- link:EnableRepoNuget.adoc[**Nuget**] (Windows, Visual Studio)
