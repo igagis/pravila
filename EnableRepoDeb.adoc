@@ -17,7 +17,6 @@ where
   sudo apt install dirmngr
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
 
-
 . Update apt packages
 
   sudo apt update
