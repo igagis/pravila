@@ -1,6 +1,6 @@
 = enable deb repo
 
-For debian / ubuntu / raspbian Linux systems.
+For **debian** / **ubuntu** / **raspbian** Linux systems.
 
 . Add the repo to your `/etc/apt/sources.list` (needs to be done once):
 +
