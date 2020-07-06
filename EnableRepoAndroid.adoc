@@ -17,7 +17,6 @@ so that it looks something like
           url 'https://dl.bintray.com/igagis/android/'
       }
   }
-  
   dependencies {
     ...
   }
