@@ -48,8 +48,6 @@ git branch --force latest HEAD || source myci-error.sh "git branch --force lates
 
 git push --set-upstream origin latest master || source myci-error.sh "git push failed"
 
-# git push || source myci-error.sh "git push failed"
-
 git tag $version || source myci-error.sh "git tag failed"
 
 git push --force --tags || source myci-error.sh "git push --tags failed"
