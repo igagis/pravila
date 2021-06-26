@@ -1,54 +1,53 @@
 #!/bin/bash
 
-#This script releases the current version.
-#It changes the debian record to unstable release
-#And pushes the release to git repo adding the release tag.
+# this script releases the current version
 
-#we want exit immediately if any command fails and we want error in piped commands to be preserved
+# it changes the debian record to unstable release
+# and pushes the release to git repo adding the release tag
+
+# we want exit immediately if any command fails and we want error in piped commands to be preserved
 set -eo pipefail
 
-git pull
-if [[ $? -ne 0 ]]; then
-    echo "error: git pull failed"
-    exit 1;
-fi
+[[ ! -z ${DEBEMAIL+x} ]] || source myci-error.sh "DEBEMAIL is unset"
+[[ ! -z ${DEBFULLNAME+x} ]] || source myci-error.sh "DEBFULLNAME is unset"
 
+while [[ $# > 0 ]] ; do
+	case $1 in
+		--help)
+			echo "Usage:"
+			echo "  $(basename $0) [<options>]"
+			echo " "
+            echo "options:"
+            echo "  --no-release-checks    do not perform checks before release"
+            echo " "
+			echo "Example:"
+			echo "  $(basename $0)"
+			exit 0
+			;;
+        --no-release-checks)
+            no_release_checks=true;
+            ;;
+		*)
+            source myci-error.sh "unknown argument specified: $1"
+			;;
+	esac
+	[[ $# > 0 ]] && shift;
+done
+
+[ "$no_release_checks" == "true" ] || source $(dirname $0)/do-release-checks.sh
 
 version=$(myci-deb-version.sh debian/changelog)
 
-#echo $version
+# echo $version
 
-if [[ -z ${DEBEMAIL+x} ]]; then echo "error: DEBEMAIL is unset"; exit 1; fi
-if [[ -z ${DEBFULLNAME+x} ]]; then echo "error: DEBFULLNAME is unset"; exit 1; fi
+dch --release --distribution=unstable "" || source myci-error.sh "dch --release failed"
 
-dch -r -D unstable ""
-if [[ $? -ne 0 ]]; then
-    echo "dch -r failed"
-    exit 1;
-fi
+git commit --all --message="release $version" || source myci-error.sh "git commit failed"
 
-git commit -a -m"release $version"
-if [[ $? -ne 0 ]]; then
-    echo "error: git commit failed"
-    exit 1;
-fi
+git push || source myci-error.sh "git push failed"
 
-git push
-if [[ $? -ne 0 ]]; then
-    echo "error: git push failed"
-    exit 1;
-fi
+git tag --force latest || source myci-error.sh "git tag --force latest failed"
 
-git tag $version
-if [[ $? -ne 0 ]]; then
-    echo "error: git tag failed"
-    exit 1;
-fi
+git tag $version || source myci-error.sh "git tag failed"
 
-#git tag -f latest
-
-git push -f --tags
-if [[ $? -ne 0 ]]; then
-    echo "error: git push --tags failed"
-    exit 1;
-fi
+git push --force --tags || source myci-error.sh "git push --tags failed"
