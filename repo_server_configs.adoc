@@ -1,0 +1,29 @@
+= conan_server systemd service
+
+As user `repo` create data directory
+....
+mkdir -p /home/repo/conan-server-data
+....
+
+Add `/etc/systemd/system/conan.service` file with contents
+....
+[Unit]
+Description=conan server
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=repo
+Group=repo
+ExecStart=conan_server --server_dir /home/repo/conan-server-data
+Restart=on-failure
+....
+
+then
+
+....
+sudo systemctl enable conan.service
+sudo systemctl start conan.service
+....
