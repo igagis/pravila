@@ -14,11 +14,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: cross-platform C++ library.
  Some library.
 
-Package: lib%NAME%$(soname)-dbg
+Package: lib%NAME%$(soname)-dbgsrc
 Section: debug
 Architecture: any
-Depends: lib%NAME%$(soname) (= ${binary:Version}), ${misc:Depends}
-Description: debugging symbols for lib%NAME%$(soname) package.
+Depends: lib%NAME%$(soname)-dbgsym (= ${binary:Version}), ${misc:Depends}
+Description: debugging sources for lib%NAME%$(soname) package.
 
 Package: lib%NAME%-dev
 Section: libdevel
