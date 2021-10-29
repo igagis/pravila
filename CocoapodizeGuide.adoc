@@ -26,6 +26,10 @@
 ... select `Build Settings`
 ... in search field enter `ios deployment target`
 ... set `iOS Deployment Target` setting to `iOS 11.0`
+.. set static framework
+... `Build Settings` -> `Mach-O Type`: `Static Library`
+.. set to build all architectures
+... `Build Settings` -> `Build Active Architecture Only`: `No`
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
