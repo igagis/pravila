@@ -4,7 +4,7 @@
 . create `cocoapods` directory in project root and create `podspec`
 .. copy `%name%.podspec.in` template to `cocoapods` directory, edit it accordingly and add to git
 . run `Xcode` and and create a new project
-.. as a template for the new project select `ios`/`Static Library`
+.. as a template for the new project select `ios`/`Framework`
 .. click `Next`
 .. as `Product Name` enter the library name **without** `lib` prefix
 .. fill `Organization Name` and `Organization Identifier` fields
@@ -21,42 +21,46 @@
 ... select `Build Settings`, and select filter `All`
 ... in search field enter `other linker flags`
 ... edit the `Other Linker Flags` settings for both `Release` and `Debug`, set it to `$(inherited)`
-.. remove `catalyst` support
-... in the project files navigator, select library name with blue icon
-... select `Build Settings`
-... in search field enter `catalyst`
-... set `Supports Mac Catalyst` setting to `No`
-.. set deployment target to `iOS 8.0` to support both `armv7` and `arm64` architectures
+.. set deployment target to `iOS 11.0`
 ... in the project files navigator, select library name with blue icon
 ... select `Build Settings`
 ... in search field enter `ios deployment target`
-... set `iOS Deployment Target` setting to `iOS 8.0`
+... set `iOS Deployment Target` setting to `iOS 11.0`
 . close the `Xcode`
 . copy the `Podfile` template to `xcode` directory and edit it accordingly
 . add the whole `xcode` directory to git and possibly make a commit. After that it is safe to go to `xcode` directory and run `pod install`
 . configure automatic adding of source to the project. This is needed because `Xcode` is unable to pick all sources from specific directory, so we use side tool for just adding all sources from directory to `Xcode` project.
++
+[source, yaml]
+....
+- name: add sources to xcode project
+  run: |
+    curl -L https://github.com/zackslash/Xcode-Proj-Adder/raw/master/bin/XcodeProjAdder -O
+    chmod +x XcodeProjAdder
+    cd xcode/$PACKAGE_NAME
+    ../../XcodeProjAdder -XCP $PACKAGE_NAME.xcodeproj -SCSV `echo $(find ../../src -type f -name *.cpp) | sed -E -e 's/ /,/g'`
+....
 
-  before_script:
-- if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
-    curl -L https://github.com/zackslash/Xcode-Proj-Adder/raw/master/bin/XcodeProjAdder -O &&
-    chmod +x XcodeProjAdder &&
-    (cd xcode/$PACKAGE_NAME && ../../XcodeProjAdder -XCP $PACKAGE_NAME.xcodeproj -SCSV `echo $(find ../../src -type f -name *.cpp) | sed -E -e 's/ /,/g'`)
-  fi
+. add building for `ios` to ci script:
++
+[source, yaml]
+....
+- name: build
+  run: |
+    xcodebuild CONFIGURATION_BUILD_DIR=../build_ios -sdk iphoneos -workspace xcode/$PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME -configuration Release
+    xcodebuild CONFIGURATION_BUILD_DIR=../build_iossim -sdk iphonesimulator -workspace xcode/$PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME -configuration Release
+    xcodebuild -create-xcframework -framework "xcode/build_ios/$PACKAGE_NAME.framework" -framework "xcode/build_iossim/$PACKAGE_NAME.framework" -output "xcode/$PACKAGE_NAME.xcframework"
+- name: create package
+  run: myci-create-zip-package.sh --headers-dir src --file xcode/$PACKAGE_NAME.xcframework///lib/ios --file LICENSE $PACKAGE_NAME-$PACKAGE_VERSION.zip
+....
 
-. add building for `ios` to `.travis-ci.yml`:
-
-  script:
-- if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
-    xcodebuild -workspace xcode/$PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME CONFIGURATION_BUILD_DIR=../build -configuration Release &&
-    myci-create-zip-package.sh -h src -f xcode/build/lib$PACKAGE_NAME.a///lib/ios -f LICENSE $PACKAGE_NAME-$PACKAGE_VERSION.zip;
-  fi
-
-. add deploying to `cocoapods` repo into the `.travis-ci.yml`:
-
-  deploy:
-  - provider: script
-    skip_cleanup: true
-    script: myci-deploy-cocoapods.sh -r igagis -v $PACKAGE_VERSION -u igagis -b cocoapods -p $PACKAGE_NAME-$PACKAGE_VERSION.zip cocoapods/$PACKAGE_NAME.podspec.in
-    on:
-      tags: true
-      condition: $TRAVIS_JOB_NAME = ios
+. add deploying to `cocoapods` repo into the ci script:
++
+[source, yaml]
+....
+- name: deploy
+  run: |
+    echo "${{ secrets.MYCI_REPO_SSH_KEY }}" > repo_key_rsa && chmod 600 repo_key_rsa
+    myci-deploy-cocoapods-ssh.sh --repo cppfw --version $PACKAGE_VERSION --server gagis.hopto.org --key repo_key_rsa --generic-repo cppfw/cocoapods --package $PACKAGE_NAME-$PACKAGE_VERSION.zip cocoapods/$PACKAGE_NAME.podspec.in
+  if: startsWith(github.ref, 'refs/tags/')
+....
