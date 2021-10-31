@@ -25,7 +25,7 @@
 ... in the project files navigator, select library name with blue icon
 ... select `Build Settings`
 ... in search field enter `ios deployment target`
-... set `iOS Deployment Target` setting to `iOS 11.0`
+... set `iOS Deployment Target` setting to `iOS 9.0`
 .. set static framework
 ... `Build Settings` -> `Mach-O Type`: `Static Library`
 .. set to build all architectures
