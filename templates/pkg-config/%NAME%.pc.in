@@ -1,9 +1,0 @@
-Name: %NAME%   # human-readable name
-Description: Some C++ library # human-readable description
-Version: $(version)
-URL: https://github.com/igagis/%NAME%
-Requires:
-Conflicts:
-Libs: -l%NAME%
-Libs.private:
-Cflags:
