@@ -1,3 +1,9 @@
+= install conan_server
+
+```console
+sudo pip3 install conan_server
+```
+
 = conan_server systemd service
 
 As user `repo` create data directory
