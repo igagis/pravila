@@ -1,7 +1,7 @@
 = install conan_server
 
 ```console
-sudo pip3 install conan_server
+sudo pip3 install conan-server
 ```
 
 = conan_server systemd service
