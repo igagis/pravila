@@ -33,3 +33,5 @@ then
 sudo systemctl enable conan.service
 sudo systemctl start conan.service
 ....
+
+Check the `conan-server-data/server.conf` file and add users as needed under the `[users]` section. Restart `conan.service` as necessary.
